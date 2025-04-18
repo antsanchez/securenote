@@ -2,10 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added viewport meta tag -->
   <title>Secure Note + Tools</title>
   <style>
-    body { font-family: sans-serif; max-width: 700px; margin: 2em auto; }
-    textarea, input { width: 100%; padding: 0.5em; margin: 0.5em 0; }
+    body { 
+      font-family: sans-serif; 
+      max-width: 700px; 
+      margin: 2em auto; 
+      padding: 0 1em; /* Add horizontal padding for smaller screens */
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+    textarea, input { 
+      width: 100%; 
+      padding: 0.5em; 
+      margin: 0.5em 0; 
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
     textarea { height: 150px; } /* Increased height */
     button { padding: 0.5em 1em; margin: 0.5em 0; }
     .output-box { word-break: break-word; white-space: pre-wrap; background: #f2f2f2; padding: 1em; min-height: 50px; } /* Added min-height */
@@ -19,6 +31,54 @@
     footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; text-align: center; font-size: 0.9em; color: #666; }
     footer a { margin: 0 0.5em; color: #333; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      body {
+        margin: 1em auto; /* Reduce top/bottom margin */
+        padding: 0 0.5em; /* Reduce side padding */
+      }
+      h1 {
+        font-size: 1.5em; /* Slightly smaller heading */
+      }
+      h2 {
+        font-size: 1.2em;
+      }
+      button, .tabs button {
+        padding: 0.6em 0.8em; /* Adjust button padding */
+        font-size: 0.9em;
+      }
+      .tabs {
+        border-bottom: none; /* Remove bottom border for stacked layout */
+      }
+      .tabs button {
+        display: block; /* Stack buttons */
+        width: 100%;    /* Make buttons full width */
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 0.25em; /* Add space below each button */
+        border-bottom: 1px solid #ccc; /* Add bottom border to all tab buttons */
+        text-align: center; /* Center text */
+        box-sizing: border-box; /* Ensure padding is included in width */
+      }
+      .tabs button.active {
+         /* Keep background and font-weight */
+         border-bottom: 1px solid #ccc; /* Ensure active also has bottom border */
+         /* Optionally add a stronger visual indicator */
+         border-left: 4px solid #44d;
+         padding-left: calc(0.8em - 4px); /* Adjust padding to account for border */
+      }
+      .tab-section {
+        padding: 1em; /* Reduce padding inside tabs */
+        border-top: 1px solid #ccc; /* Restore top border */
+        margin-top: 1em; /* Add space above content */
+      }
+      textarea {
+        height: 120px; /* Slightly smaller textarea */
+      }
+      .security-notice, .info-text, footer {
+        font-size: 0.85em; /* Adjust text sizes */
+      }
+    }
   </style>
 </head>
 <body>
