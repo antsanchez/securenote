@@ -40,6 +40,7 @@ This is a simple HTML-based utility for encrypting/decrypting notes and performi
 5.  Click the "Replace" button.
 6.  The modified text will appear in the output box.
 
+
 ## Security Notes
 
 *   **Client-Side Operation:** This tool runs entirely in your web browser. No data, including your messages or passwords, is ever sent to any external server. All processing happens locally on your machine.
