@@ -42,6 +42,7 @@ This is a simple HTML-based utility for encrypting/decrypting notes and performi
 
 ## Security Notes
 
-*   Encryption uses the standard Web Crypto API (AES-GCM with PBKDF2 for key derivation).
-*   **Important:** If you forget your password, there is no way to recover the encrypted message.
-*   This tool runs entirely client-side; your data is not sent to any server.
+*   **Client-Side Operation:** This tool runs entirely in your web browser. No data, including your messages or passwords, is ever sent to any external server. All processing happens locally on your machine.
+*   **Strong Encryption:** Encryption uses the standard Web Crypto API, specifically AES-GCM, which is a widely recognized and secure authenticated encryption algorithm. The key is derived from your password using PBKDF2 with 100,000 iterations and SHA-256, adding significant protection against brute-force attacks.
+*   **Password Security:** The security of your encrypted message relies heavily on the strength of your password. Use a long, complex, and unique password.
+*   **No Recovery:** If you forget your password, there is absolutely no way to recover the encrypted message. Store your password securely.

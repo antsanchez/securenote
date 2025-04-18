@@ -9,10 +9,13 @@
     textarea { height: 150px; } /* Increased height */
     button { padding: 0.5em 1em; margin: 0.5em 0; }
     .output-box { word-break: break-word; white-space: pre-wrap; background: #f2f2f2; padding: 1em; min-height: 50px; } /* Added min-height */
-    .tabs button { margin-right: 1em; }
-    .tab-section { display: none; }
-    .tab-section.active { display: block; }
+    .tabs { border-bottom: 1px solid #ccc; margin-bottom: 0; } /* Add bottom border */
+    .tabs button { margin-right: 1em; background: #eee; border: 1px solid #ccc; border-bottom: none; cursor: pointer; padding: 0.5em 1em; } /* Adjusted padding */
+    .tabs button.active { background: #fff; font-weight: bold; border-bottom: 1px solid #fff; } /* Active button style */
+    .tab-section { display: none; border: 1px solid #ccc; padding: 1.5em; margin-top: -1px; border-top: none; } /* Remove top border, rely on .tabs border */
+    .tab-section.active { display: block; background-color: #fff; } /* Add background to active section */
     .info-text { font-size: 0.9em; color: #555; margin-bottom: 1em; } /* Style for info text */
+    .security-notice { background-color: #eef; border-left: 4px solid #44d; padding: 1em; margin: 1.5em 0; font-size: 0.9em; } /* Style for security notice */
     footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid #ccc; text-align: center; font-size: 0.9em; color: #666; }
     footer a { margin: 0 0.5em; color: #333; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -21,9 +24,13 @@
 <body>
   <h1>🔐 Secure Note Utility</h1>
   <div class="tabs">
-    <button onclick="switchTab('encrypt')">🔒 Encrypt</button>
-    <button onclick="switchTab('decrypt')">🔓 Decrypt</button>
-    <button onclick="switchTab('replace')">🔁 Replace Characters</button>
+    <button id="btn-encrypt" onclick="switchTab('encrypt', this)" class="active">🔒 Encrypt</button> <!-- Added ID, pass 'this', add initial active class -->
+    <button id="btn-decrypt" onclick="switchTab('decrypt', this)">🔓 Decrypt</button> <!-- Added ID, pass 'this' -->
+    <button id="btn-replace" onclick="switchTab('replace', this)">🔁 Replace Characters</button> <!-- Added ID, pass 'this' -->
+  </div>
+
+  <div class="security-notice">
+    <strong>Security Assurance:</strong> All encryption and decryption operations happen entirely within your browser using the standard Web Crypto API (AES-GCM). Your passwords and messages are never sent to any server, ensuring maximum privacy and security. Remember to use a strong, unique password.
   </div>
 
   <!-- Encrypt -->
@@ -59,12 +66,28 @@
 
   <script>
     // Tab switching
-    function switchTab(tabId) {
+    function switchTab(tabId, clickedButton) {
+      // Hide all sections
       document.querySelectorAll('.tab-section').forEach(sec => {
         sec.classList.remove('active');
       });
+      // Deactivate all buttons
+      document.querySelectorAll('.tabs button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show the target section
       document.getElementById(tabId).classList.add('active');
+      // Activate the clicked button
+      clickedButton.classList.add('active');
     }
+
+    // Initialize the first tab button as active on load
+    document.addEventListener('DOMContentLoaded', () => {
+        // No need to explicitly set active here anymore as it's set in HTML
+        // If we wanted JS to control initial state:
+        // switchTab('encrypt', document.getElementById('btn-encrypt'));
+    });
 
     // Encryption / Decryption Functions
     async function getKey(password, salt) {
